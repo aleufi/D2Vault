@@ -31,7 +31,6 @@ passport.use(
         .then((currentUser) => {
             if(currentUser){
 
-                console.log('Usuário é: ' + currentUser);
                 done(null, currentUser);
 
             }else{
@@ -50,7 +49,6 @@ passport.use(
                 })
                 .save()
                 .then((newUser) => {
-                    console.log('Novo Usuário Criado: ' + newUser);
                     done(null, newUser);
                 })
                 

@@ -9,7 +9,7 @@ router.get('/login', (req, res) =>{
 router.get('/bungie', passport.authenticate('bungie'));
 //segunda run
 router.get('/bungie/redirect', passport.authenticate('bungie'), (req,res) =>{
-    res.json({'Oba': 'Você alcançou a response'})
+    res.send(req.user)
 })
 
 module.exports = router;

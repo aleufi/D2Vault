@@ -1,5 +1,6 @@
 //express
 const express = require('express');
+const app = express();
 // rotas (importa rotas)
 const authRoutes = require('./Routes/auth-routes');
 // passport (importa passport)
@@ -15,7 +16,8 @@ const keys = require('./Config/keys');
 //cookie session
 const cookieSession = require('cookie-session')
 
-const app = express();
+const path = require('path');
+
 const PORT = process.env.PORT || 5000;
 
 
@@ -36,9 +38,17 @@ app.use(passport.session())
 //Connect to mongoDB
 mongoose.connect(keys.mongodb.dbURI);
 
-// Home route
+//server reactapp
+app.use(express.static(path.join(__dirname, 'client', 'build')))
+
+
+
+// Client routes
+app.get('/login', (req, res) =>{
+    res.sendFile(path.join(__dirname, 'client' , 'build', 'index.html'))
+})
 app.get('/', (req, res) => {
-    res.json({ "mensagem": "Home do Servidor" });
+    res.json({oba: "oba"});
 });
 
 //Oauth routes
