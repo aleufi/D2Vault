@@ -1,0 +1,15 @@
+html{
+    background-color: #12171c;
+}
+
+$primary: #FFB841;
+$info: #141a1f;
+$dark: #12171c;
+
+#aleufiFooter:hover{
+    #warlockFooterIcon{
+        fill: #cc9334
+    }
+}
+
+@import 'node_modules/bootstrap/scss/bootstrap';
