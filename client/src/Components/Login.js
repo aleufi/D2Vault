@@ -14,7 +14,7 @@ function Login() {
   let randomCharacterQuote = randomCharacter[parseInt(Math.random() * ((Object.keys(randomCharacter)).length - 1))] 
 
   return (
-    <div className="App bg-dark vh-100 d-flex align-items-center">
+    <div className="bg-dark vh-100 d-flex align-items-center">
 
     <Container className='bg-dark'>
 

@@ -2,7 +2,8 @@
 const express = require('express');
 const app = express();
 // rotas (importa rotas)
-const authRoutes = require('./Routes/auth-routes');
+const authRoutes = require('./Routes/Config/auth-routes');
+const clientRoutes = require('./Routes/Config/client-routes')
 // passport (importa passport)
 const passport = require('passport')
 
@@ -28,7 +29,7 @@ app.set('view engine', 'ejs')
 
 
 app.use(cookieSession({
-    maxAge: 24 * 60 * 60 * 1000,
+    maxAge: 120000,
     keys: [keys.session.cookieKey]
 }));
 
@@ -38,24 +39,26 @@ app.use(passport.session())
 //Connect to mongoDB
 mongoose.connect(keys.mongodb.dbURI);
 
-//server reactapp
+
+//serve reactapp static
 app.use(express.static(path.join(__dirname, 'client', 'build')))
 
 
 
 // Client routes
+app.use('/home', clientRoutes)
+
 app.get('/login', (req, res) =>{
     res.sendFile(path.join(__dirname, 'client' , 'build', 'index.html'))
 })
-app.get('/', (req, res) => {
-    res.json({oba: "oba"});
-});
+
+
 
 //Oauth routes
 app.use('/auth', authRoutes)
 
 
-//Success message
+//Success connexion message
 app.listen(PORT, () => {
     console.log(`Servidor rodando na porta ${PORT}`);
 });
